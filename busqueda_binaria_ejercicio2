@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+// Función recursiva para generar la representación binaria de x
+void busquedaBinariaReal(double izquierda, double derecha, double x, int pasos) {
+    if (pasos == 0) return; // condición de paro
+
+    double medio = (izquierda + derecha) / 2.0;
+
+    if (x > medio) {
+        printf("1");
+        busquedaBinariaReal(medio, derecha, x, pasos - 1);
+    } else if (x < medio) {
+        printf("0");
+        busquedaBinariaReal(izquierda, medio, x, pasos - 1);
+    } else {
+        // caso x == medio, imprimimos 1 y luego solo ceros
+        printf("1");
+        for (int i = 1; i < pasos; i++) {
+            printf("0");
+        }
+    }
+}
+
+int main() {
+    double x;
+    int k;
+
+    printf("Ingrese un número real x en el intervalo [0,1): ");
+    scanf("%lf", &x);
+
+    printf("Ingrese el número de pasos k: ");
+    scanf("%d", &k);
+
+    printf("Salida binaria aproximada: ");
+    busquedaBinariaReal(0.0, 1.0, x, k);
+    printf("\n");
+
+    return 0;
+}
