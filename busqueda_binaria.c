@@ -6,7 +6,7 @@ int busquedaBinariaRecursiva(int arreglo[], int izquierda, int derecha, int elem
     // Verificar si todavía hay elementos por buscar
     if (derecha >= izquierda) {
         // Calcular el punto medio (evita desbordamiento)
-        int medio = izquierda + (derecha - izquierda) / 2;
+        int medio = (derecha - izquierda) / 2;
         
         // Si encontramos el elemento en el medio, retornar su posición
         if (arreglo[medio] == elemento)
