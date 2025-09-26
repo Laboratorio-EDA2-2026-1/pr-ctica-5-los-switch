@@ -39,7 +39,7 @@ int main() {
         return 1;
     }
 
-    // Llamada a la función de ordenamiento corregida
+    // Llamada a la función de ordenamiento
     counting_sort_alphabet(A, n, case_sensitive);
 
     printf("Arreglo ordenado: %s\n", A);
