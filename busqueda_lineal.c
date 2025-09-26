@@ -71,7 +71,6 @@ int main() {
     int clave = 5;
     int n = sizeof(arr) / sizeof(arr[0]);
 
-    // Nota: Modificamos el arreglo original, lo que puede ser una desventaja.
     // Una mejor versión podría usar un arreglo auxiliar o copiar el arreglo.
     int indice = busquedaLinealMejorada(arr, n, clave);
 
