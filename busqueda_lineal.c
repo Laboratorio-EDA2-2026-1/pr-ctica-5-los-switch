@@ -5,11 +5,11 @@
 #include <stdio.h>
 
 int buscarLineal(int arr[], int n, int valorBuscado) {
-    // Itera a través del arreglo desde el primer elemento (índice 0)
+    // Itera a través del arreglo desde el primer elemento 
     for (int i = 0; i < n; i++) {
         // Compara el elemento actual con el valor buscado
         if (arr[i] == valorBuscado) {
-            // Si hay una coincidencia, devuelve la posición (índice)
+            // Si hay una coincidencia, devuelve la posición 
             return i;
         }
     }
