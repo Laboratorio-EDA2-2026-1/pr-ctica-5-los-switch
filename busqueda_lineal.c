@@ -1,93 +1,162 @@
 // Escribe aquí la implementación de los ejercicios de búsqueda lineal.
 
-//Busqueda linea simple
 
+// Ejercicio 1. Búsqueda Lineal Simple
 #include <stdio.h>
 
-int buscarLineal(int arr[], int n, int valorBuscado) {
-    // Itera a través del arreglo desde el primer elemento 
+int busquedaLinealSimple(int arr[], int n, int objetivo) {
+    // Recorre todo el arraglo desde el inicio hasta el final
     for (int i = 0; i < n; i++) {
-        // Compara el elemento actual con el valor buscado
-        if (arr[i] == valorBuscado) {
-            // Si hay una coincidencia, devuelve la posición 
-            return i;
+        // Compara cada elemento con el objetivo
+        if (arr[i] == objetivo) {
+            return i; // Retorna la posición si encontra el elemento
         }
     }
-    // Si el bucle termina sin encontrar el valor, devuelve -1
-    return -1;
+    return -1; // Retorna -1 si no encontra el elemento
 }
 
 int main() {
-    int miArreglo[] = {10, 5, 8, 12, 3, 15}; // El arreglo donde buscaremos
-    int tamano = sizeof(miArreglo) / sizeof(miArreglo[0]); // Calcula el tamaño del arreglo
-    int valor_a_buscar = 8; // El valor que queremos encontrar
-
-    // Llama a la función de búsqueda lineal
-    int posicion = buscarLineal(miArreglo, tamano, valor_a_buscar);
-
-    // Muestra el resultado
-    if (posicion != -1) {
-        printf("El valor %d se encontró en la posición %d\n", valor_a_buscar, posicion);
+    int arr[] = {9, 4, 23, 45, 7, 11, 15};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int objetivo = 7;
+    
+    int resultado = busquedaLinealSimple(arr, n, objetivo);
+    
+    if (resultado != -1) {
+        printf("Elemento encontrado en la posición %d\n", resultado);
     } else {
-        printf("El valor %d no se encontró en el arreglo\n", valor_a_buscar);
+        printf("Elemento no encontrado\n");
     }
-
-    // Ejemplo buscando un valor que no está en el arreglo
-    valor_a_buscar = 99;
-    posicion = buscarLineal(miArreglo, tamano, valor_a_buscar);
-    if (posicion != -1) {
-        printf("El valor %d se encontró en la posición %d\n", valor_a_buscar, posicion);
-    } else {
-        printf("El valor %d no se encontró en el arreglo\n", valor_a_buscar);
-    }
-
+    
     return 0;
 }
 
 
-//Busqueda de linea mejorada
+
+
+// Ejercicio 2. Búsqueda Lineal Mejorada
 #include <stdio.h>
 
-// Función para realizar la búsqueda lineal mejorada
-int busquedaLinealMejorada(int arr[], int n, int clave) {
-    // Colocar la clave al final del arreglo para actuar como centinela
-    arr[n] = clave;
-    int i = 0;
-    while (arr[i] != clave) {
-        i++;
+int busquedaLinealMejorada(int arr[], int n, int objetivo) {
+    // Caso arreglo vacío
+    if (n <= 0) {
+        return -1;
     }
-
-    // Si el índice es n (la última posición), significa que la clave no estaba originalmente
-    // en el arreglo (la encontramos en el centinela). Si es menor que n, se encontró.
-    if (i < n) {
-        return i; // Devuelve el índice donde se encontró la clave
-    } else {
-        return -1; // Indica que el elemento no está en el arreglo (si no se encontró en las primeras n posiciones)
+    
+    // Caso si el primer elemento es el objetivo
+    if (arr[0] == objetivo) {
+        return 0;
     }
+    
+    // Busca desde la posición 1 hasta el final
+    for (int i = 1; i < n; i++) {
+        if (arr[i] == objetivo) {
+            return i; // Si encuentra el elemento objetivo retorna
+        }
+    }
+    
+    return -1; // Si no lo encuentra retorna -1
 }
 
 int main() {
-    int arr[] = {10, 2, 8, 5, 12};
-    int clave = 5;
+    int arr[] = {9, 4, 23, 45, 7, 11, 15};
     int n = sizeof(arr) / sizeof(arr[0]);
-
-    // Una mejor versión podría usar un arreglo auxiliar o copiar el arreglo.
-    int indice = busquedaLinealMejorada(arr, n, clave);
-
-    if (indice != -1) {
-        printf("El elemento %d se encontró en el índice: %d\n", clave, indice);
+    int objetivo = 45;
+    
+    int resultado = busquedaLinealMejorada(arr, n, objetivo);
+    
+    if (resultado != -1) {
+        printf("Elemento encontrado en la posición %d\n", resultado);
     } else {
-        printf("El elemento %d no se encontró en el arreglo.\n", clave);
+        printf("Elemento no encontrado\n");
     }
+    
+    return 0;
+}
 
-    // Para otro caso donde el elemento no está
-    clave = 99;
-    indice = busquedaLinealMejorada(arr, n, clave);
-    if (indice != -1) {
-        printf("El elemento %d se encontró en el índice: %d\n", clave, indice);
+
+
+
+// Ejercicio 3. Búsqueda Lineal Recursiva
+#include <stdio.h>
+
+int busquedaLinealRecursiva(int arr[], int objetivo, int inicio, int fin) {
+    // Caso si el inicio supera al fin, el elemento no fue encontrado
+    if (inicio > fin) {
+        return -1;
+    }
+    
+    // Caso si encuentra el elemento en la posición actual
+    if (arr[inicio] == objetivo) {
+        return inicio;
+    }
+    
+    // Llamada recursiva: busca en el siguiente elemento
+    return busquedaLinealRecursiva(arr, objetivo, inicio + 1, fin);
+}
+
+int busquedaRecursiva(int arr[], int n, int objetivo) {
+    return busquedaRecursiva(arr, objetivo, 0, n - 1);
+}
+
+int main() {
+    int arr[] = {9, 4, 23, 45, 7, 11, 15};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int objetivo = 11;
+    
+    int resultado = busquedaRecursiva(arr, n, objetivo);
+    
+    if (resultado != -1) {
+        printf("Elemento encontrado en la posición %d\n", resultado);
     } else {
-        printf("El elemento %d no se encontró en el arreglo.\n", clave);
+        printf("Elemento no encontrado\n");
     }
+    
+    return 0;
+}
 
+
+
+// Ejercicio 4. Búsqueda Lineal con Centinela
+#include <stdio.h>
+#include <stdlib.h>
+
+// Agrega el elemento buscado al final del arraglo para evitar verificar límites
+int busquedaConCentinela(int arr[], int n, int objetivo) {
+    // Guarda el último elemento original
+    int ultimoOriginal = arr[n - 1];
+    
+    // Establece el centinela (objetivo) en la última posición
+    arr[n - 1] = objetivo;
+    
+    int i = 0;
+    // Busca hasta encontrar el objetivo 
+    while (arr[i] != objetivo) {
+        i++;
+    }
+    
+    // Restaura el último elemento original
+    arr[n - 1] = ultimoOriginal;
+    
+    // Verifica si encontro el objetivo antes del centinela
+    if (i < n - 1 || arr[n - 1] == objetivo) {
+        return i;
+    }
+    return -1; // Se retorna -1 si no se encontra
+}
+
+int main() {
+    int arr[] = {9, 4, 23, 45, 7, 11, 15};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int objetivo = 15;
+    
+    int resultado = busquedaConCentinela(arr, n, objetivo);
+    
+    if (resultado != -1) {
+        printf("Elemento encontrado en la posición %d\n", resultado);
+    } else {
+        printf("Elemento no encontrado\n");
+    }
+    
     return 0;
 }
