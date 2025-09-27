@@ -96,7 +96,7 @@ int busquedaLinealRecursiva(int arr[], int objetivo, int inicio, int fin) {
 }
 
 int busquedaRecursiva(int arr[], int n, int objetivo) {
-    return busquedaRecursiva(arr, objetivo, 0, n - 1);
+    return busquedaLinealRecursiva(arr, objetivo, 0, n - 1);
 }
 
 int main() {
